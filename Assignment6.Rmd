@@ -1,86 +1,155 @@
 ---
 title: "Assignment 6"
-author: "Charles Lang"
-date: "11/16/2016"
+author: "He Chen, AbdulMalik Muftau, Andy Yu, Ali Al Jabri, Daniel Kwak,Jiaxin Ling, Melika Ghayoomi, Nicole Schlosberg"
+date: "12/2/2020"
 output: html_document
 ---
-#Addignment 6
 
-In this assignment you will be looking at data from a MOOC. It contains the following per-student variables:
-
-certified (yes/no) - Whether or not a student paid for the course  
-forum.posts (numeric) - How many forum posts a student made throughout the course  
-grade (numeric) - A student's average grade for the course exam  
-assignment (numeric) - A student's average grade for the course assignments  
-
-##Part I
-
-#Packages
-```{r}
-library(rpart)
-```
-
-#Data
-```{r}
-#Upload the data sets MOOC1.csv and MOOC2.csv
-M1 <- read.csv("MOOC1.csv", header = TRUE)
-
-M2 <- 
-
-```
-
-#Decision tree
-```{r}
-#Using the rpart package generate a classification tree predicting certified from the other variables in the M1 data frame. Which variables should you use?
-
-c.tree1 <- 
-
-#Check the results from the classifcation tree using the printcp() command
-
-
-
-#Plot your tree
-
-post(c.tree1, file = "tree1.ps", title = "MOOC") #This creates a pdf image of the tree
-
-```
-
-##Part II
-
-#The heading "xerror" in the printcp table stands for "cross validation error", it is the error rate of assigning students to certified/uncertified of the model averaged over 10-fold cross validation. CP stands for "Complexity Parameter" and represents the cost to error for adding a node to the tree. Notice it decreases as we add more nodes to the tree which implies that more nodes make better predictions. However, more nodes also mean that we may be making the model less generalizable, this is known as "overfitting".
-
-#If we are worried about overfitting we can remove nodes form our tree using the prune() command, setting cp to the CP value from the table that corresponds to the number of nodes we want the tree to terminate at. Let's set it to two nodes.
 
 ```{r}
-c.tree2 <- prune(c.tree1, cp = )#Set cp to the level at which you want the tree to end
+#load packages
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(plotly)
+library(factoextra)
 
-#Visualize this tree and compare it to the one you generated earlier
-
-post(c.tree2, file = "tree2.ps", title = "MOOC") #This creates a pdf image of the tree
-```
-
-#Now use both the original tree and the pruned tree to make predictions about the the students in the second data set. Which tree has a lower error rate?
-
-```{r}
-M2$predict1 <- predict(c.tree1, M2, type = "class")
-
-M2$predict2 <- predict(c.tree2, M2, type = "class")
-
-table(M2$certified, M2$predict1)
-
-table(M2$certified, M2$predict2)
-
-```
-
-##Part III
-
-Choose a data file from the (University of Michigan Open Data Set)[https://github.com/bkoester/PLA/tree/master/data]. Choose an outcome variable that you would like to predict. Build two models that predict that outcome from the other variables. The first model should use raw variables, the second should feature select or feature extract variables from the data. Which model is better according to the cross validation metrics?
-
-```{r}
-
+# loading the data
+data1 <- read.csv("Ali.csv")
+data1$ID <- "Ali"
+data2 <- read.csv("Nicole.csv")
+data2$ID <- "Nicole"
+data3 <- read.csv("Melika.csv")
+data3$ID <- "Melika"
+data4 <- read.csv("DanielKwakpushup.csv",  header = -1 )
+data4$ID <- "Daniel"
+data5 <- read.csv("HeChenSensor(HC).csv")
+data5$ID <- "HeChen"
+data6 <- read.csv("jiaxin(JL).csv")
+data6$ID <- "Jiaxin"
+data7 <- read.csv("Malik_pushupdata.csv")
+data7$ID <- "Malik"
+data8 <- read.csv("jiasheng_sensor_update.csv")
+data8$ID <- 'Jiasheng'
+colnames(data8) <- c("time","wx","wy","wz","ID")
+data4 <- data4[-1,-5]
+colnames(data4) <- c("time","wx","wy","wz","ID")
 ```
 
 
-### To Submit Your Assignment
+##  Task II
+```{r}
+#Option 1 kmeans
+#combining and cleaning data, and calculate all average angular speeds for each participant
+data <- rbind(data1,data2,data3,data4,data5,data6,data7, data8)
+data <- select(data, -1)
+data[1:3] <- sapply(data[1:3], as.numeric)
+data <- na.omit(data)
+subject_data <- data %>% group_by(ID) %>% summarise(AverageX = mean(abs(wx)), AverageY = mean(abs(wy)), AverageZ = mean(abs(wz)))
+subject_data <- arrange(subject_data, ID)
 
-Please submit your assignment by first "knitting" your RMarkdown document into an html file and then commit, push and pull request both the RMarkdown file and the html file.
+# add counts data to the main dataset
+countData <- na.omit(read.csv('Questionnairre.csv'))
+countData <- arrange(countData, X)
+pushupCounts <- countData$Number.of.Pushups
+subject_data$pushupCounts <- pushupCounts
+
+# fit the data by using Kmeans
+Kmeans_data <- select(subject_data, c(-1,-5))
+Kmeans_data <- scale(Kmeans_data)
+fit <- kmeans(Kmeans_data,2)
+
+subject_data$cluster <- as.factor(paste('cluster',fit$cluster))
+
+#Kmeans visual route 1
+labels <- paste(subject_data$ID, "(", subject_data$pushupCounts, ")")
+plot_ly(subject_data,x=~AverageX, y=~AverageY, z=~AverageZ, type="scatter3d", mode="markers", color=~cluster, text = labels)
+```
+
+```{r}
+#Option 2 kmeans
+# Removing time and storing the data as numeric 
+data<-data[,-4]
+data$wx <- as.numeric(data$wx)
+data$wy <- as.numeric(data$wy)
+data$wz <- as.numeric(data$wz)
+
+# Running the k-means
+K <- scale(data)
+k2 <- as.data.frame(na.omit(K))
+str(k2)
+fit <- kmeans(k2, 3)
+#fit$cluster
+
+# K means visual route 2 
+library(factoextra)
+fviz_cluster(fit, data = k2)
+```
+
+
+Using K-means, can you identify the novices from the experts using only the app data?
+
+ANSWER: Yes. According to the graph, you can see clear clusters on those that are doing well (experts) and those that are not (novices). Then when we compare with the number of push-ups each person did the clusters correspond, thus k-means does work for our activity in showing experts and novices in our group.
+
+
+##  Task III
+```{r}
+# loading the data
+D2 <- read.csv("Questionnairre.csv")
+D2 <- as.data.frame(na.omit(D2))
+str(D2)
+
+# PCA
+pca <- prcomp(D2[,c(-1,-7)], scale. = TRUE)
+summary(pca)
+plot(pca, type = "lines")
+```
+
+
+```{r}
+#questions breakdown with PCs
+loadings <- abs(pca$rotation) 
+loadings
+```
+
+
+What does PC1 represent in your analysis?
+
+ANSWER: PC1 represents all 5 of our questions with relatively equal percentages (43.96%, 45.03%, 46.90%, 41.11%, 46.36%). PC1 composes a relatively high 86.76% (cumulative proportion) of all the variance. 
+
+
+```{r}
+# PC1 visual 
+fviz_pca_ind(pca,
+             col.ind = "cos2", # Color by the quality of representation
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE     # Avoid text overlapping
+)
+
+# PCA visual 
+fviz_pca_var(pca,
+             col.var = "contrib", # Color by contributions to the PC
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE     # Avoid text overlapping
+)
+```
+
+
+##  Task IV
+
+If you could only choose one thing to predict the score for each member of your group (raw data variable, a cluster or a PC) what would it be and why?
+
+ANSWER: PC1 would be the best option for predicting the score of each member of the group because it is more representative of each 
+
+```{r}
+#Visualizations for answer
+#Total variation explained by PCA
+library(factoextra)
+fviz_eig(pca)
+```
+
+
+Based on your conclusion devise an intervention that would help novice members of your group improve their performance
+
+ANSWER: Intervention 1 - Novice members could repeat the activity daily for improved results. 
+Intervention 2 - Novice members can do fast pushups in the beginning to make up for the lost energy in the end, which results in less or no pushups.
