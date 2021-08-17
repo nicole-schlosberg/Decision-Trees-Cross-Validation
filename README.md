@@ -22,7 +22,7 @@
 * Ran a PCA analysis on the data.
 * Visualized PC1 results for each participant.
 
-![](pca.pdf)
+![](pca.png)
 
 ![](individual.png)
 
