@@ -26,5 +26,6 @@
 
 ### Step IV
 * PC1 would be the best option for predicting the score of each member of the group, because it is more representative of each 
-* ![A visualization that supports our conclusion](Visualization.png)
+* A visualization that supports our conclusion
+!(Visualization.png)
 * To improve their performance, novicse could repeat the activity daily for improved result or do fast pushups in the beginning to make up for the lost energy in the end, which results in less or no pushups.
