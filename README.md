@@ -10,11 +10,9 @@
 * Collected measurements for all members of the group performing the task using the app.
 * Created a Github repo where you can store and share your data
 * Used K-means to identify the novices from the experts using only the app data. According to the graph, you can see clear clusters on those that are doing well (experts) and those that are not (novices). Then when we compare with the number of push-ups each person did the clusters correspond, thus k-means does work for our activity in showing experts and novices in our group.
-* Visualized the results using.
-
+* Visualized the results.
 ![Route1](3.png)
 ![Route1](4.png)
-
 ![Route2](route2.png)
 
 ### Step III
@@ -22,12 +20,10 @@
 * Collected data from all members of your group.
 * Ran a PCA analysis on the data.
 * Visualized PC1 results for each participant.
-
+* PCA
 ![](pca.png)
-
 * Individual - PCA
 ![](individual.png)
-
 * Variables - PCA
 ![](Variables.png)
 
@@ -36,7 +32,5 @@
 ### Step IV
 * PC1 would be the best option for predicting the score of each member of the group, because it is more representative of each 
 * A visualization that supports our conclusion
-
 ![](Visualization.png)
-
 * To improve their performance, novicse could repeat the activity daily for improved result or do fast pushups in the beginning to make up for the lost energy in the end, which results in less or no pushups.
