@@ -11,10 +11,9 @@
 * Created a Github repo where you can store and share your data
 * Used K-means to identify the novices from the experts using only the app data. According to the graph, you can see clear clusters on those that are doing well (experts) and those that are not (novices). Then when we compare with the number of push-ups each person did the clusters correspond, thus k-means does work for our activity in showing experts and novices in our group.
 * Visualized the results using.
+![Route1](Route1.mov)
 
-![Route 1](Route1.mov)
-
-![Route 2](route2.png)
+![Route2](route2.png)
 
 ### Step III
 * Devised five questions on a five point Likert scale that ask about their experience with the chosen task.
