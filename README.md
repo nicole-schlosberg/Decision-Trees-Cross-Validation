@@ -13,9 +13,7 @@
 * Visualized the results using.
 
 ![Route1](1.png)
-
 ![Route1](2.png)
-
 ![Route1](3.png)
 
 ![Route2](route2.png)
