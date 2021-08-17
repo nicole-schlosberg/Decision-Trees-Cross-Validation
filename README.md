@@ -20,12 +20,12 @@
 * Ran a PCA analysis on the data.
 * PC1 represents all 5 of our questions with relatively equal percentages (43.96%, 45.03%, 46.90%, 41.11%, 46.36%). PC1 composes a relatively high 86.76% (cumulative proportion) of all the variance.
 * Visualized PC1 results for each participant.
-![PCA](pca.png)
+![](pca.png)
 ![](individual.png)
 ![](Variables.png)
 
 ### Step IV
 * PC1 would be the best option for predicting the score of each member of the group, because it is more representative of each 
 * A visualization that supports our conclusion
-!(Visualization.png)
+![](Visualization.png)
 * To improve their performance, novicse could repeat the activity daily for improved result or do fast pushups in the beginning to make up for the lost energy in the end, which results in less or no pushups.
