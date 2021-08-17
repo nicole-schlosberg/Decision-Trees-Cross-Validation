@@ -1,5 +1,5 @@
 ---
-title: "Assignment 6"
+title: "Decision Trees"
 author: "He Chen, AbdulMalik Muftau, Andy Yu, Ali Al Jabri, Daniel Kwak,Jiaxin Ling, Melika Ghayoomi, Nicole Schlosberg"
 date: "12/2/2020"
 output: html_document
@@ -37,7 +37,7 @@ colnames(data4) <- c("time","wx","wy","wz","ID")
 ```
 
 
-##  Task II
+##  Step II
 ```{r}
 #Option 1 kmeans
 #combining and cleaning data, and calculate all average angular speeds for each participant
@@ -92,7 +92,7 @@ Using K-means, can you identify the novices from the experts using only the app 
 ANSWER: Yes. According to the graph, you can see clear clusters on those that are doing well (experts) and those that are not (novices). Then when we compare with the number of push-ups each person did the clusters correspond, thus k-means does work for our activity in showing experts and novices in our group.
 
 
-##  Task III
+##  Step III
 ```{r}
 # loading the data
 D2 <- read.csv("Questionnairre.csv")
@@ -135,7 +135,7 @@ fviz_pca_var(pca,
 ```
 
 
-##  Task IV
+##  Step IV
 
 If you could only choose one thing to predict the score for each member of your group (raw data variable, a cluster or a PC) what would it be and why?
 
