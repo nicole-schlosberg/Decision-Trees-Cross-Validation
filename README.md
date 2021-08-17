@@ -20,14 +20,15 @@
 * Devised five questions on a five point Likert scale that ask about their experience with the chosen task.
 * Collected data from all members of your group.
 * Ran a PCA analysis on the data.
-* PC1 represents all 5 of our questions with relatively equal percentages (43.96%, 45.03%, 46.90%, 41.11%, 46.36%). PC1 composes a relatively high 86.76% (cumulative proportion) of all the variance.
 * Visualized PC1 results for each participant.
 
-![](pca.png)
+![](pca.pdf)
 
 ![](individual.png)
 
 ![](Variables.png)
+
+* PC1 represents all 5 of our questions with relatively equal percentages (43.96%, 45.03%, 46.90%, 41.11%, 46.36%). PC1 composes a relatively high 86.76% (cumulative proportion) of all the variance.
 
 ### Step IV
 * PC1 would be the best option for predicting the score of each member of the group, because it is more representative of each 
