@@ -27,7 +27,7 @@
 * Individual - PCA
 ![](individual.png)
 
-* Variables
+* Variables - PCA
 ![](Variables.png)
 
 * PC1 represents all 5 of our questions with relatively equal percentages (43.96%, 45.03%, 46.90%, 41.11%, 46.36%). PC1 composes a relatively high 86.76% (cumulative proportion) of all the variance.
